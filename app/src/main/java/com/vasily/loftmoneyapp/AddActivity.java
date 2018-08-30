@@ -27,37 +27,17 @@ public class AddActivity extends AppCompatActivity {
 
 
 
-
-//        TextWatcher watcher = new TextWatcher() {
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//            }
-//
-//            public void afterTextChanged(Editable editable) {
-//
-//
-//                addBtn.setEnabled(!TextUtils.isEmpty(editable));
-//
-//
-//            }
-//
-//        };
-
         TextWatcher watcher = new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 addBtn.setEnabled(!TextUtils.isEmpty(nameInput.getText()) && !TextUtils.isEmpty(priceInput.getText()));
             }
+
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -66,6 +46,6 @@ public class AddActivity extends AppCompatActivity {
         nameInput.addTextChangedListener(watcher);
 
         priceInput.addTextChangedListener(watcher);
-  }
+    }
 
   }
