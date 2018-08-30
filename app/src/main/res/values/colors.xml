@@ -5,7 +5,9 @@
     <color name="colorAccent">#3574fa</color>
     <color name="green_text">#1bb7ad</color>
     <color name="btn_color_disabled">#eaeaea</color>
-    <color name="white">#eaeaea</color>
+    <color name="white">#ffffff</color>
     <color name="btn_color_enabled">#7ed321</color>
     <color name="lightish_blue">#3574fa</color>
+    <color name="apple_green">#7ed321</color>
+
 </resources>
