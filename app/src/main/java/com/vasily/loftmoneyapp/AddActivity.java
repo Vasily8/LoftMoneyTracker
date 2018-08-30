@@ -11,12 +11,9 @@ import android.widget.EditText;
 public class AddActivity extends AppCompatActivity {
 
 
-
-
     public EditText nameInput;
     public EditText priceInput;
     public Button addBtn;
-
 
 
     @Override
@@ -24,64 +21,31 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-
         nameInput = findViewById(R.id.name);
         priceInput = findViewById(R.id.price);
         addBtn = findViewById(R.id.add_btn);
 
 
 
-        nameInput .addTextChangedListener (new TextWatcher()
-
-        {
+        TextWatcher watcher = new TextWatcher() {
 
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-
-            public void afterTextChanged(Editable editable) {
-
-
-
-               addBtn.setEnabled(!TextUtils.isEmpty(editable));
-
-
-                }
-
-        });
-
-
-
-       priceInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                addBtn.setEnabled(!TextUtils.isEmpty(nameInput.getText()) && !TextUtils.isEmpty(priceInput.getText()));
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void afterTextChanged(Editable s) {
             }
+        };
 
-            @Override
-            public void afterTextChanged(Editable editable) {
+        nameInput.addTextChangedListener(watcher);
 
-
-                addBtn.setEnabled(!TextUtils.isEmpty(editable));
-
-
-            }
-        });
-
-
-
-
-
-
+        priceInput.addTextChangedListener(watcher);
     }
 
-    }
+  }
