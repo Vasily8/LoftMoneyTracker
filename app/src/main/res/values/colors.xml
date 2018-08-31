@@ -7,8 +7,12 @@
     <color name="green_text">#1bb7ad</color>
     <color name="btn_color_disabled">#eaeaea</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
     <color name="btn_color_enabled">#7ed321</color>
     <color name="lightish_blue">#3574fa</color>
     <color name="apple_green">#7ed321</color>
+    <color name="medium_gray">#666664</color>
+    <color name="dark_sky_blue">#4a90e2</color>
 
 </resources>
