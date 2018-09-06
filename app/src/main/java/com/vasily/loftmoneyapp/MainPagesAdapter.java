@@ -10,19 +10,13 @@ public class MainPagesAdapter extends FragmentPagerAdapter {
 
     private final static int PAGE_INCOMES = 0;
     private final static int PAGE_EXPENSES = 1;
-<<<<<<< Updated upstream
     private final static int PAGE_BALANCE = 2;
-=======
-    private final static int PAGE_BALANCES = 2;
->>>>>>> Stashed changes
-
     private final static int PAGES_COUNT = 3;
 
     private String[] pagesTitles;
 
     MainPagesAdapter(FragmentManager fm, Context context) {
         super(fm);
-
         pagesTitles = context.getResources().getStringArray(R.array.main_tabs);
     }
 
@@ -31,22 +25,11 @@ public class MainPagesAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case PAGE_INCOMES:
-<<<<<<< Updated upstream
-                return ItemsFragment.newInstance(ItemsFragment.TYPE_INCOMES);
-
-            case PAGE_EXPENSES:
-                return ItemsFragment.newInstance(ItemsFragment.TYPE_EXPENSES);
-            case PAGE_BALANCE:
-                return ItemsFragment.newInstance(ItemsFragment.TYPE_BALANCE);
-=======
                 return ItemsFragment.newInstance(Item.TYPE_INCOME);
-
             case PAGE_EXPENSES:
                 return ItemsFragment.newInstance(Item.TYPE_EXPENSE);
-
-            case PAGE_BALANCES:
+            case PAGE_BALANCE:
                 return ItemsFragment.newInstance(Item.TYPE_BALANCE);
->>>>>>> Stashed changes
             default:
                 return null;
         }

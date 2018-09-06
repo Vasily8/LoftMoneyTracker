@@ -4,14 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< Updated upstream
 
-public class MainActivity extends AppCompatActivity {
-
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private MainPagesAdapter adapter;
-=======
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,18 +14,14 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
      private MainPagesAdapter adapter;
->>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-<<<<<<< Updated upstream
-=======
         Log.i(TAG, "onCreate: ");
 
->>>>>>> Stashed changes
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
 
@@ -40,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-<<<<<<< Updated upstream
-=======
+
     }
 
     @Override
@@ -66,6 +54,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.i(TAG, "onDestroy: ");
->>>>>>> Stashed changes
     }
 }
