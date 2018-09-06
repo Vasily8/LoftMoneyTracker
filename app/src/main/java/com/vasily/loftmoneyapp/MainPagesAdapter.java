@@ -11,14 +11,12 @@ public class MainPagesAdapter extends FragmentPagerAdapter {
     private final static int PAGE_INCOMES = 0;
     private final static int PAGE_EXPENSES = 1;
     private final static int PAGE_BALANCE = 2;
-
     private final static int PAGES_COUNT = 3;
 
     private String[] pagesTitles;
 
     MainPagesAdapter(FragmentManager fm, Context context) {
         super(fm);
-
         pagesTitles = context.getResources().getStringArray(R.array.main_tabs);
     }
 
@@ -27,12 +25,11 @@ public class MainPagesAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case PAGE_INCOMES:
-                return ItemsFragment.newInstance(ItemsFragment.TYPE_INCOMES);
-
+                return ItemsFragment.newInstance(Item.TYPE_INCOME);
             case PAGE_EXPENSES:
-                return ItemsFragment.newInstance(ItemsFragment.TYPE_EXPENSES);
+                return ItemsFragment.newInstance(Item.TYPE_EXPENSE);
             case PAGE_BALANCE:
-                return ItemsFragment.newInstance(ItemsFragment.TYPE_BALANCE);
+                return ItemsFragment.newInstance(Item.TYPE_BALANCE);
             default:
                 return null;
         }
