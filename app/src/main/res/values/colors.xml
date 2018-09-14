@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <color name="colorPrimary">#3574fa</color>
     <color name="colorPrimaryDark">#326EEE</color>
     <color name="colorAccent">#ffc107</color>
@@ -19,6 +18,13 @@
 
     <color name="tab_text_color">#8baaef</color>
     <color name="tab_selected_text_color">#ffffff</color>
+
+    <color name="action_mode_color">#333f59</color>
+
+    <color name="item_background_selected">#f2f2f2</color>
+    <color name="item_background_default">#ffffff</color>
+
+    <color name="income_color">@color/apple_green</color>
 
 </resources>
 
