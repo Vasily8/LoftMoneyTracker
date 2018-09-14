@@ -2,13 +2,11 @@ package com.vasily.loftmoneyapp;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
@@ -163,13 +161,12 @@ public class ItemsFragment extends Fragment {
     private void removeSelectedItems() {
         List<Integer> selected = adapter.getSelectedItems();
 
-        for (int i = 0; i < selected.size(); i++) {
+        for (int i = selected.size() - 1; i >= 0; i--) {
             adapter.removeItem(selected.get(i));
         }
 
         actionMode.finish();
     }
-
 
     class AdapterListener implements ItemsAdapterListener {
 
@@ -201,12 +198,7 @@ public class ItemsFragment extends Fragment {
         }
     }
 
-
     class ActionModeCallback implements ActionMode.Callback {
-
-
-
-
 
 
         @Override
@@ -214,7 +206,6 @@ public class ItemsFragment extends Fragment {
             Log.i(TAG, "onCreateActionMode: ");
             actionMode = mode;
             return true;
-
         }
 
         @Override
@@ -232,7 +223,6 @@ public class ItemsFragment extends Fragment {
             }
             return false;
         }
-
         @Override
         public void onDestroyActionMode(ActionMode mode) {
             adapter.clearSelections();
@@ -250,9 +240,7 @@ public class ItemsFragment extends Fragment {
                 }
             });
 
-
         }
-
 
     }
 }
