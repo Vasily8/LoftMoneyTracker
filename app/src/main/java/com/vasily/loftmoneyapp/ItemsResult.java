@@ -1,7 +1,10 @@
 package com.vasily.loftmoneyapp;
 
-public class ItemsResult {
-    public String authToken;
+import java.util.List;
+
+public class ItemsResult extends Result {
+    public int id;
+    public List<Item> data;
 
 
 }

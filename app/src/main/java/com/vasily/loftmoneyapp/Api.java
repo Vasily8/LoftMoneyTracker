@@ -1,7 +1,5 @@
 package com.vasily.loftmoneyapp;
 
-import java.util.List;
-
 import javax.xml.transform.Result;
 
 import retrofit2.Call;
@@ -20,7 +18,7 @@ public interface Api {
     Call<BalanceResult> getBalance();
 
     @GET("items")
-    Call<List<Item>> getItems(@Query("type") String type);
+    Call<ItemsResult> getItems(@Query("type") String type);
 
     @POST("items/add")
     Call<ItemsResult> addItem(@Query("price") String price, @Query("name") String name, @Query("type") String type);
@@ -28,7 +26,6 @@ public interface Api {
     @POST("items/remove")
     Call<ItemsResult> removeItem(@Query("id") int id);
 
-
-
 }
+
 

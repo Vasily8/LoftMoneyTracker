@@ -3,22 +3,26 @@ package com.vasily.loftmoneyapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 public class Item implements Parcelable {
 
     public static final String TYPE_EXPENSE = "expense";
     public static final String TYPE_INCOME = "income";
 
-    private int id;
-    private String name;
-    private int price;
-    private String type;
+    int id;
+    String name;
+    int price;
+    String type;
 
 
-    public Item(int id, String name, int price, String type) {
+
+    public Item(int id, String name, int price, String type, Date date) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.type = type;
+
     }
 
     public Item(String name, int price, String type) {
@@ -26,7 +30,6 @@ public class Item implements Parcelable {
         this.price = price;
         this.type = type;
     }
-
 
 
     public int getId() {
@@ -58,8 +61,8 @@ public class Item implements Parcelable {
         dest.writeString(name);
         dest.writeInt(price);
         dest.writeString(type);
-    }
 
+    }
 
 
     protected Item(Parcel in) {
@@ -67,6 +70,7 @@ public class Item implements Parcelable {
         name = in.readString();
         price = in.readInt();
         type = in.readString();
+
     }
 
     public static final Creator<Item> CREATOR = new Creator<Item>() {

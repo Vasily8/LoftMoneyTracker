@@ -127,19 +127,19 @@ public class ItemsFragment extends Fragment {
 
     private void loadItems() {
 
-        Call call = api.getItems(type);
+        Call<ItemsResult> call = api.getItems(type);
 
-        call.enqueue(new Callback<List<Item>>() {
+        call.enqueue(new Callback<ItemsResult>() {
 
             @Override
-            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
+            public void onResponse(Call<ItemsResult> call, Response<ItemsResult> response) {
                 refresh.setRefreshing(false);
-                List<Item> items = response.body();
-                adapter.setItems(items);
+                ItemsResult items = response.body();
+                adapter.setItems(items.data);
             }
 
             @Override
-            public void onFailure(Call<List<Item>> call, Throwable t) {
+            public void onFailure(Call<ItemsResult> call, Throwable t) {
                 refresh.setRefreshing(false);
             }
         });
@@ -154,10 +154,35 @@ public class ItemsFragment extends Fragment {
             Item item = data.getParcelableExtra(AddActivity.KEY_ITEM);
             if (item.getType().equals(type)) {
                 adapter.addItem(item);
+                addItem(item);
             }
         }
     }
 
+    private void addItem(Item item){
+        Call<ItemsResult> call = api.getItems(type);
+        call.enqueue(new Callback<ItemsResult>() {
+
+            @Override
+            public void onResponse(Call<ItemsResult> call, Response<ItemsResult> response) {
+                refresh.setRefreshing(false);
+                ItemsResult items = response.body();
+                adapter.setItems(items.data);
+            }
+
+            @Override
+            public void onFailure(Call<ItemsResult> call, Throwable t) {
+                refresh.setRefreshing(false);
+            }
+        });
+
+
+
+
+
+
+
+    }
     private void removeSelectedItems() {
         List<Integer> selected = adapter.getSelectedItems();
 
