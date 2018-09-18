@@ -9,12 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.support.v7.view.ActionMode;
 import android.view.View;
 
 import java.util.List;
-
-import static com.vasily.loftmoneyapp.ItemsFragment.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
         fab = findViewById(R.id.fab);
-
-
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -83,31 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.addOnPageChangeListener(new PageListener());
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(TAG, "onStart: ");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(TAG, "onResume: ");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(TAG, "onPause: ");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "onDestroy: ");
-    }
-
 
     class PageListener implements ViewPager.OnPageChangeListener {
 

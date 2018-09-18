@@ -113,18 +113,6 @@ public class ItemsFragment extends Fragment {
 
     }
 
-    @Override
-    public void onDestroyView() {
-        Log.i(TAG, "onDestroyView: ");
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.i(TAG, "onDestroy: ");
-        super.onDestroy();
-    }
-
     private void loadItems() {
 
         Call<ItemsResult> call = api.getItems(type);
@@ -159,7 +147,7 @@ public class ItemsFragment extends Fragment {
         }
     }
 
-    private void addItem(Item item){
+    private void addItem(Item item) {
         Call<ItemsResult> call = api.getItems(type);
         call.enqueue(new Callback<ItemsResult>() {
 
@@ -176,13 +164,8 @@ public class ItemsFragment extends Fragment {
             }
         });
 
-
-
-
-
-
-
     }
+
     private void removeSelectedItems() {
         List<Integer> selected = adapter.getSelectedItems();
 
@@ -248,6 +231,7 @@ public class ItemsFragment extends Fragment {
             }
             return false;
         }
+
         @Override
         public void onDestroyActionMode(ActionMode mode) {
             adapter.clearSelections();

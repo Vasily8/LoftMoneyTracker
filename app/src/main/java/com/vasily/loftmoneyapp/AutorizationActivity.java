@@ -87,7 +87,7 @@ public class AutorizationActivity extends AppCompatActivity {
     }
 
     private void updateUI(GoogleSignInAccount account) {
-        if (account == null){
+        if (account == null) {
             showError(getString(R.string.account_error_msg_null));
             return;
         }
@@ -99,6 +99,8 @@ public class AutorizationActivity extends AppCompatActivity {
                 AuthResult authResult = response.body();
                 if (authResult != null && authResult.isSuccess()) {
                     app.saveAuthToken(authResult.authToken);
+                    Intent intent = new Intent(AutorizationActivity.this, MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }
             }
