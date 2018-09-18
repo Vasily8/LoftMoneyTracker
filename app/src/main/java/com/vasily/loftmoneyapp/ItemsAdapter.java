@@ -29,13 +29,15 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
     }
 
     public void addItem(Item item) {
-        this.items.add(item);
+        items.add(item);
         notifyItemInserted(items.size() - 1);
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        if (items != null)
+            return items.size();
+        return 0;
     }
 
     @NonNull

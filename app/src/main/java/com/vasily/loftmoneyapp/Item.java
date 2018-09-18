@@ -3,8 +3,6 @@ package com.vasily.loftmoneyapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
-
 public class Item implements Parcelable {
 
     public static final String TYPE_EXPENSE = "expense";
@@ -17,7 +15,7 @@ public class Item implements Parcelable {
 
 
 
-    public Item(int id, String name, int price, String type, Date date) {
+    public Item(int id, String name, int price, String type) {
         this.id = id;
         this.name = name;
         this.price = price;

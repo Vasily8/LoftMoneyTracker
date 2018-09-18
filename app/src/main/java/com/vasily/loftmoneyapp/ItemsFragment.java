@@ -123,7 +123,9 @@ public class ItemsFragment extends Fragment {
             public void onResponse(Call<ItemsResult> call, Response<ItemsResult> response) {
                 refresh.setRefreshing(false);
                 ItemsResult items = response.body();
-                adapter.setItems(items.data);
+                if (items != null) {
+                    adapter.setItems(items.data);
+                }
             }
 
             @Override
@@ -148,7 +150,7 @@ public class ItemsFragment extends Fragment {
     }
 
     private void addItem(Item item) {
-        Call<ItemsResult> call = api.getItems(type);
+        Call<ItemsResult> call = api.addItem(String.valueOf(item.price),item.name,item.type);
         call.enqueue(new Callback<ItemsResult>() {
 
             @Override
