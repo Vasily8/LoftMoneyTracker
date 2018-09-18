@@ -113,33 +113,23 @@ public class ItemsFragment extends Fragment {
 
     }
 
-    @Override
-    public void onDestroyView() {
-        Log.i(TAG, "onDestroyView: ");
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.i(TAG, "onDestroy: ");
-        super.onDestroy();
-    }
-
     private void loadItems() {
 
-        Call call = api.getItems(type);
+        Call<ItemsResult> call = api.getItems(type);
 
-        call.enqueue(new Callback<List<Item>>() {
+        call.enqueue(new Callback<ItemsResult>() {
 
             @Override
-            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
+            public void onResponse(Call<ItemsResult> call, Response<ItemsResult> response) {
                 refresh.setRefreshing(false);
-                List<Item> items = response.body();
-                adapter.setItems(items);
+                ItemsResult items = response.body();
+                if (items != null) {
+                    adapter.setItems(items.data);
+                }
             }
 
             @Override
-            public void onFailure(Call<List<Item>> call, Throwable t) {
+            public void onFailure(Call<ItemsResult> call, Throwable t) {
                 refresh.setRefreshing(false);
             }
         });
@@ -154,8 +144,28 @@ public class ItemsFragment extends Fragment {
             Item item = data.getParcelableExtra(AddActivity.KEY_ITEM);
             if (item.getType().equals(type)) {
                 adapter.addItem(item);
+                addItem(item);
             }
         }
+    }
+
+    private void addItem(Item item) {
+        Call<ItemsResult> call = api.addItem(String.valueOf(item.price),item.name,item.type);
+        call.enqueue(new Callback<ItemsResult>() {
+
+            @Override
+            public void onResponse(Call<ItemsResult> call, Response<ItemsResult> response) {
+                refresh.setRefreshing(false);
+                ItemsResult items = response.body();
+                adapter.setItems(items.data);
+            }
+
+            @Override
+            public void onFailure(Call<ItemsResult> call, Throwable t) {
+                refresh.setRefreshing(false);
+            }
+        });
+
     }
 
     private void removeSelectedItems() {
@@ -223,6 +233,7 @@ public class ItemsFragment extends Fragment {
             }
             return false;
         }
+
         @Override
         public void onDestroyActionMode(ActionMode mode) {
             adapter.clearSelections();
