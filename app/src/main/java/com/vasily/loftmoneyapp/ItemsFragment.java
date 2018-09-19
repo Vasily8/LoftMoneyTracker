@@ -61,7 +61,6 @@ public class ItemsFragment extends Fragment {
     private ItemsAdapter adapter;
     private Api api;
     private SwipeRefreshLayout refresh;
-
     private String type;
 
     public ActionMode actionMode;
@@ -80,7 +79,7 @@ public class ItemsFragment extends Fragment {
         adapter.setListener(new AdapterListener());
 
 
-        loadItems();
+
     }
 
     @Override
@@ -111,25 +110,26 @@ public class ItemsFragment extends Fragment {
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
 
+        loadItems();
     }
 
     private void loadItems() {
 
-        Call<ItemsResult> call = api.getItems(type);
+        Call<List<Item>> call = api.getItems(type);
 
-        call.enqueue(new Callback<ItemsResult>() {
+        call.enqueue(new Callback<List<Item>>() {
 
             @Override
-            public void onResponse(Call<ItemsResult> call, Response<ItemsResult> response) {
+            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
                 refresh.setRefreshing(false);
-                ItemsResult items = response.body();
+                List<Item> items = response.body();
                 if (items != null) {
-                    adapter.setItems(items.data);
+                    adapter.setItems(items);
                 }
             }
 
             @Override
-            public void onFailure(Call<ItemsResult> call, Throwable t) {
+            public void onFailure(Call<List<Item>> call, Throwable t) {
                 refresh.setRefreshing(false);
             }
         });
@@ -150,19 +150,35 @@ public class ItemsFragment extends Fragment {
     }
 
     private void addItem(Item item) {
-        Call<ItemsResult> call = api.addItem(String.valueOf(item.price),item.name,item.type);
-        call.enqueue(new Callback<ItemsResult>() {
+        Call<List<Item>> call = api.addItem(String.valueOf(item.price),item.name,item.type);
+        call.enqueue(new Callback<List<Item>>() {
 
             @Override
-            public void onResponse(Call<ItemsResult> call, Response<ItemsResult> response) {
+            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
                 refresh.setRefreshing(false);
-                ItemsResult items = response.body();
-                adapter.setItems(items.data);
+                List<Item> items = response.body();
+                adapter.setItems(items);
             }
 
             @Override
-            public void onFailure(Call<ItemsResult> call, Throwable t) {
+            public void onFailure(Call<List<Item>> call, Throwable t) {
                 refresh.setRefreshing(false);
+            }
+        });
+
+    }
+
+    private void deleteItem (int id) {
+        Call<List<Item>> call = api.removeItem(id);
+        call.enqueue(new Callback<List<Item>>() {
+            @Override
+            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Item>> call, Throwable t) {
+
             }
         });
 
@@ -172,6 +188,7 @@ public class ItemsFragment extends Fragment {
         List<Integer> selected = adapter.getSelectedItems();
 
         for (int i = selected.size() - 1; i >= 0; i--) {
+            deleteItem(adapter.getItems().get(selected.get(i)).getId());
             adapter.removeItem(selected.get(i));
         }
 

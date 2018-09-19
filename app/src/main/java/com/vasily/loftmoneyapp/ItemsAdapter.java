@@ -89,6 +89,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         notifyItemRemoved(position);
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView name;
