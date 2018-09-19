@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -24,12 +29,13 @@ public class BalanceFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     private Api api;
     private TextView expense;
     private TextView income;
     private TextView balance;
     private DiagramView diagramView;
-
+    private SwipeRefreshLayout refresh;
 
 
     public BalanceFragment() {
@@ -41,8 +47,6 @@ public class BalanceFragment extends Fragment {
         super.onCreate(savedInstanceState);
         api = ((App) getActivity().getApplication()).getApi();
     }
-
-
 
 
     @Override
@@ -62,14 +66,32 @@ public class BalanceFragment extends Fragment {
         updateData();
     }
 
+
     private void updateData() {
-        int expense = 45000;
-        int income = 20000;
-        int balance = 67000;
-        this.expense.setText(String.valueOf(expense));
-        this.income.setText(String.valueOf(income));
-        this.balance.setText(String.valueOf(balance));
-        diagramView.update(income, expense);
+
+        Call<BalanceResult> call = api.getBalance();
+        call.enqueue(new Callback<BalanceResult>() {
+            @Override
+            public void onResponse(Call<BalanceResult> call, Response<BalanceResult> response) {
+                BalanceResult balanceResult = response.body();
+
+                if (balanceResult != null) {
+                    Long totalExpenses = balanceResult.totalExpenses;
+                    Long totalIncome = balanceResult.totalIncome;
+                    expense.setText(String.valueOf(totalExpenses));
+                    income.setText(String.valueOf(totalIncome));
+                    balance.setText(String.valueOf(totalExpenses - totalExpenses));
+                    diagramView.update(totalIncome, totalExpenses);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BalanceResult> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
 

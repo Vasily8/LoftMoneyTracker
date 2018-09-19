@@ -11,8 +11,8 @@ import android.view.View;
 
     public class DiagramView extends View {
 
-        private int income;
-        private int expense;
+        private Long income;
+        private Long expense;
 
         private Paint expensePaint = new Paint();
         private Paint incomePaint = new Paint();
@@ -31,11 +31,11 @@ import android.view.View;
             incomePaint.setColor(ContextCompat.getColor(context, R.color.income_color));
             expensePaint.setColor(ContextCompat.getColor(context, R.color.expense_color));
 
-            income = 74000;
-            expense = 5400;
+            income = 74000L;
+            expense = 5400L;
         }
 
-        public void update(int income, int expense) {
+        public void update(Long income, Long expense) {
             this.income = income;
             this.expense = expense;
             invalidate();
